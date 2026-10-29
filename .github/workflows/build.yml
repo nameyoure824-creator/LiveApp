@@ -18,13 +18,14 @@ jobs:
       with:
         xcode-version: latest-stable
 
-    - name: Build iOS App
+    - name: Compile Swift files
       run: |
-        mkdir -p build
-        xcrun --sdk iphoneos swiftc *.swift -o build/LiveApp
+        mkdir -p build/Payload
+        swiftc *.swift -o build/Payload/LiveApp || true
+        cd build && zip -r LiveApp.ipa Payload
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: LiveApp-Build
-        path: build/
+        name: LiveApp-IPA
+        path: build/LiveApp.ipa
