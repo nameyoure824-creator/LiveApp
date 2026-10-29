@@ -18,3 +18,8 @@ jobs:
 
     - name: Check Swift Version
       run: swift --version
+      - name: Upload Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: LiveApp-Build
+        path: build/
